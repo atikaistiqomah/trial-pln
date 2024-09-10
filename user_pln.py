@@ -1,7 +1,7 @@
 import streamlit as st
 import sqlite3
 from contextlib import closing
-from db_set import  save_user_data_to_db,get_db_connection, get_indicators_by_form_id, get_filter_options, get_form_id_by_filter, get_user_data
+from set_app.db_set import  save_user_data_to_db,get_db_connection, get_indicators_by_form_id, get_filter_options, get_form_id_by_filter, get_user_data
 
 # ============================================== #
 
@@ -22,23 +22,27 @@ def user_input_form():
             user_input[indicator['name']] = {}
             try:
                 if indicator['subindicators']:
-                    sub_scores = []
-                    for sub in indicator['subindicators']:
-                        realisasi = st.number_input(f"Realisasi untuk {sub['name']} (Target: {sub['target_value']})", 
-                                                min_value=0.0, step=1.0, 
-                                                key=f"user_score_{indicator['name']}_{sub['name']}")
-                        pemetaan = st.number_input(f"Terpetakan untuk {sub['name']}", 
-                                    min_value=0.0, step=1.0, 
-                                    key=f"user_map_{indicator['name']}_{sub['name']}")
-                        sub_scores.append(realisasi/pemetaan)
-                        user_input[indicator['name']][sub['name']] = sub_scores
+                    try:
+                        sub_scores = []
+                        for sub in indicator['subindicators']:
+                            realisasi = st.number_input(f"Realisasi untuk {sub['name']} (Target: {sub['target_value']})", 
+                                                    min_value=0.0, step=1.0, 
+                                                    key=f"user_score_{indicator['name']}_{sub['name']}")
+                            pemetaan = st.number_input(f"Terpetakan untuk {sub['name']}", 
+                                        min_value=0.0, step=1.0, 
+                                        key=f"user_map_{indicator['name']}_{sub['name']}")
+                            sub_scores.append(realisasi/pemetaan)
+                            user_input[indicator['name']][sub['name']] = sub_scores
 
-                    average_sub_score = sum(sub_scores) / len(sub_scores) if sub_scores else 0
-                    final_score = average_sub_score * indicator['weight']
-                    total_score += final_score
-                    # total_weight += indicator['weight']
-                    user_input[indicator['name']]['final_score'] = final_score
-                    st.write(f"Skor Akhir Indikator {indicator['name']}: {final_score:.4f}")
+                        average_sub_score = sum(sub_scores) / len(sub_scores) if sub_scores else 0
+                        final_score = average_sub_score * indicator['weight']
+                        total_score += final_score
+                        # total_weight += indicator['weight']
+                        user_input[indicator['name']]['final_score'] = final_score
+                        st.write(f"Skor Akhir Indikator {indicator['name']}: {final_score:.4f}")
+                    except ZeroDivisionError as e:
+                        print(f"Error occurred: {e}") 
+                        
                 else:
                     realisasi = st.number_input(f"Realisasi untuk {indicator['name']} (Target: {indicator['target_value']})", 
                                             min_value=0.0, step=1.0, 
