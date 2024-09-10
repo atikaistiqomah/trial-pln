@@ -130,7 +130,7 @@ def user_valid():
         }
         for data in get_user_data(username)
         if data['verified'] for key in data['Input']
-        if 'final_score' in data['Input'][key]
+        # if 'final_score' in data['Input'][key]
     ]
 
     if validated_data:
