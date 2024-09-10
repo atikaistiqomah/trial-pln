@@ -1,5 +1,5 @@
 import streamlit as st
-from set_app.auth import login, logout
+from auth import login, logout
 # from main_program.user_pln import fill_form_structure
 # from main_program.admin_pln import create_form_structure
 from db_set import get_user_data, create_tables, get_indicators_from_db, add_admin_user, get_forms_from_db
