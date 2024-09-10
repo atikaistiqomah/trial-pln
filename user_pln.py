@@ -129,6 +129,7 @@ def user_valid():
             "Nilai": data['Nilai']
         }
         for data in get_user_data(username)
+        if data['verified']
         # if data['verified'] for key in data['Nilai']
         # if 'final_score' in data['Input'][key]
     ]
