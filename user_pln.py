@@ -125,11 +125,11 @@ def user_valid():
             "Indikator": key,
             "Year": data['Year'],
             "Semester": data['Semester'],
-            "Form Name": data['Form Name'],
-            "Skor Akhir": data['Input'][key]['final_score']
+            "Form Name": data['Form Name']
+            # "Skor Akhir": data['Input'][key]['final_score']
         }
         for data in get_user_data(username)
-        if data['verified'] for key in data['Input']
+        # if data['verified'] for key in data['Input']
         # if 'final_score' in data['Input'][key]
     ]
 
