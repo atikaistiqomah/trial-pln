@@ -126,7 +126,7 @@ def user_valid():
             "Year": data['Year'],
             "Semester": data['Semester'],
             "Form Name": data['Form Name'],
-            "Skor Akhir": data['Input']['final_score']
+            "Nilai": data['Nilai']
         }
         for data in get_user_data(username)
         # if data['verified'] for key in data['Input']
