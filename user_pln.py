@@ -125,7 +125,7 @@ def user_valid():
             # "Indikator": key,
             "Year": data['Year'],
             "Semester": data['Semester'],
-            "Form Name": data['Form Name']
+            "Form Name": data['Form Name'],
             "Skor Akhir": data['Input']['final_score']
         }
         for data in get_user_data(username)
