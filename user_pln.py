@@ -22,8 +22,8 @@ def user_input_form():
             user_input[indicator['name']] = {}
             try:
                 if indicator['subindicators']:
+                    sub_scores = []
                     try:
-                        sub_scores = []
                         for sub in indicator['subindicators']:
                             realisasi = st.number_input(f"Realisasi untuk {sub['name']} (Target: {sub['target_value']})", 
                                                     min_value=0.0, step=1.0, 
@@ -41,7 +41,7 @@ def user_input_form():
                         user_input[indicator['name']]['final_score'] = final_score
                         st.write(f"Skor Akhir Indikator {indicator['name']}: {final_score:.4f}")
                     except ZeroDivisionError as e:
-                        print(f"Error occurred: {e}") 
+                        print(f"Error occurred: {e}")    
                         
                 else:
                     realisasi = st.number_input(f"Realisasi untuk {indicator['name']} (Target: {indicator['target_value']})", 
