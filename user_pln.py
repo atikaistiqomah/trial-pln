@@ -122,7 +122,7 @@ def user_valid():
     username = st.session_state['user']['username']
     validated_data = [
         {
-            "Indikator": key,
+            # "Indikator": key,
             "Year": data['Year'],
             "Semester": data['Semester'],
             "Form Name": data['Form Name']
