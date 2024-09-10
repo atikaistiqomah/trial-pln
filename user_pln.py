@@ -1,7 +1,7 @@
 import streamlit as st
 import sqlite3
 from contextlib import closing
-from set_app.db_set import  save_user_data_to_db,get_db_connection, get_indicators_by_form_id, get_filter_options, get_form_id_by_filter, get_user_data
+from db_set import  save_user_data_to_db,get_db_connection, get_indicators_by_form_id, get_filter_options, get_form_id_by_filter, get_user_data
 
 # ============================================== #
 
