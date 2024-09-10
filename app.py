@@ -2,9 +2,9 @@ import streamlit as st
 from set_app.auth import login, logout
 # from main_program.user_pln import fill_form_structure
 # from main_program.admin_pln import create_form_structure
-from set_app.db_set import get_user_data, create_tables, get_indicators_from_db, add_admin_user, get_forms_from_db
-from main_program.admin_pln import admin_interface, verif_user, validasi_form, grafik_admin
-from main_program.user_pln import user_interface, user_valid, grafik_user, form_filled
+from db_set import get_user_data, create_tables, get_indicators_from_db, add_admin_user, get_forms_from_db
+from admin_pln import admin_interface, verif_user, validasi_form, grafik_admin
+from user_pln import user_interface, user_valid, grafik_user, form_filled
 
 # set layout web
 st.set_page_config(page_title="PLN HCR",
