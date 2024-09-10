@@ -4,7 +4,7 @@ from contextlib import closing
 import json
 
 def get_db_connection():
-    conn = sqlite3.connect('db/new_data.db')
+    conn = sqlite3.connect('new_data.db')
     conn.row_factory = sqlite3.Row
     return conn
 
