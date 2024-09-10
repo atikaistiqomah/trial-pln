@@ -168,7 +168,7 @@ def verif_user():
 
             # Kolom kedua untuk informasi detail user
             with col2:
-                st.dataframe(data['Input'])
+                st.write(data['Input'])
 
             # Kolom ketiga untuk checkbox validasi
             with col3:
