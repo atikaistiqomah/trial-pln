@@ -138,7 +138,7 @@ def user_valid():
     ]
 
     if validated_data:
-        st.table(validated_data)
+        st.dataframe(validated_data)
     else:
         st.write("Belum ada data yang divalidasi oleh admin.")
         
