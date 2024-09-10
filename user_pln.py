@@ -122,14 +122,14 @@ def user_valid():
     username = st.session_state['user']['username']
     validated_data = [
         {
-            "Indikator": key,
+            # "Indikator": key,
             "Year": data['Year'],
             "Semester": data['Semester'],
             "Form Name": data['Form Name'],
             "Nilai": data['Nilai']
         }
         for data in get_user_data(username)
-        if data['verified'] for key in data['Nilai']
+        # if data['verified'] for key in data['Nilai']
         # if 'final_score' in data['Input'][key]
     ]
 
