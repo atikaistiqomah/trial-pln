@@ -1,10 +1,11 @@
 import streamlit as st
-from auth import login, logout
+from streamlit_option_menu import option_menu
+from set_app.auth import login, logout
 # from main_program.user_pln import fill_form_structure
 # from main_program.admin_pln import create_form_structure
-from db_set import get_user_data, create_tables, get_indicators_from_db, add_admin_user, get_forms_from_db
-from admin_pln import admin_interface, verif_user, validasi_form, grafik_admin
-from user_pln import user_interface, user_valid, grafik_user, form_filled
+from set_app.db_set import get_user_data, create_tables, get_indicators_from_db, add_admin_user, get_forms
+from main_program.admin_pln import admin_interface, verif_user, validasi_form, show_admin_graph, daftar_form, detail_view, admin_register_user, admin_change_password, display_user
+from main_program.user_pln import user_interface, show_user_graph, form_filled
 
 # set layout web
 st.set_page_config(page_title="PLN HCR",
@@ -40,7 +41,7 @@ create_tables()
 # Inisialisasi session state untuk form dan indikator
 def session_initiate():
     if 'form_structures' not in st.session_state:
-        st.session_state['form_structures'] = get_forms_from_db()
+        st.session_state['form_structures'] = get_forms()
         st.session_state['indicators'] = get_indicators_from_db()
 
     # Inisialisasi session state untuk user data
@@ -63,13 +64,20 @@ def main():
         st.rerun()
 
     if st.session_state.is_admin:
-        page = st.sidebar.radio("Pilih Halaman Admin", ["Buat Form", "Daftar Form", "Verifikasi Data", "Hasil Validasi", "Grafik Capaian"])
+        page = st.sidebar.selectbox("Pilih Halaman Admin", ["Buat Form", "Daftar Form", "Detail Form", "Verifikasi Data", "Hasil Validasi", "Grafik Capaian", "Daftarkan Unit", "Ubah Password Akun"])
         if page == "Buat Form":
             # create_form_structure()
             admin_interface()
         elif page == "Daftar Form":
             # admin_user_score_matrix()
-            st.dataframe(get_forms_from_db()) # sementara
+            session_initiate()
+            daftar_form()
+        elif page == "Detail Form":
+            # fill_form_structure()
+            if 'form_structures' in st.session_state and st.session_state['indicators']:
+                detail_view()
+            else:
+                st.write("Admin belum menyelesaikan penambahan indikator.")
         elif page == "Verifikasi Data":
             session_initiate()
             verif_user()
@@ -78,10 +86,27 @@ def main():
             session_initiate()
             validasi_form()
         elif page == "Grafik Capaian":
-            grafik_admin()
+            show_admin_graph()
+        elif page == "Daftarkan Unit":
+            # if 'username' not in st.session_state:
+            #     st.session_state['username'] = ""
+            # if 'name' not in st.session_state:
+            #     st.session_state['name'] = ""
+            # if 'email' not in st.session_state:
+            #     st.session_state['email'] = ""
+            # if 'password' not in st.session_state:
+            #     st.session_state['password'] = ""
+            if st.session_state['user']['role'] == 'admin':
+                admin_register_user()
+                
+        elif page == "Ubah Password Akun":
+            if st.session_state['user']['role'] == 'admin':
+                display_user()
+                admin_change_password()
+                
             
     else:
-        page = st.sidebar.radio("Pilih Halaman User", ["Pengisian Form", "Form Terisi", "Hasil Validasi", "Grafik Capaian"])
+        page = st.sidebar.selectbox("Pilih Halaman User", ["Pengisian Form", "Form Terisi", "Grafik Capaian"])
         if page == "Pengisian Form":
             session_initiate()
             # fill_form_structure()
@@ -92,15 +117,8 @@ def main():
         elif page == "Form Terisi":
             session_initiate()
             form_filled()
-        elif page == "Hasil Validasi":
-            # username = st.session_state['user']
-            # if username in st.session_state['user_data']:
-            #     session_initiate()
-            #     st.session_state['user_data']
-            session_initiate()
-            user_valid()
         elif page == "Grafik Capaian":
-            grafik_user()
+            show_user_graph()
 
 
 if __name__ == "__main__":
