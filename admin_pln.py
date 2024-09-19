@@ -195,6 +195,7 @@ def verif_user():
             with col2:
                 st.dataframe(data['Input'])
                 st.write(f"Nilai: {data['Nilai']}")
+                st.write(f" ")
 
             # Kolom ketiga untuk checkbox validasi
             with col3:
