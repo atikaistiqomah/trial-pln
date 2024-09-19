@@ -1,5 +1,5 @@
 import streamlit as st
-from set_app.db_set import get_user
+from db_set import get_user
 
 def authenticate(username, password):
     user = get_user(username)
