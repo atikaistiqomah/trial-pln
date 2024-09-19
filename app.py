@@ -1,11 +1,11 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from set_app.auth import login, logout
+from auth import login, logout
 # from main_program.user_pln import fill_form_structure
 # from main_program.admin_pln import create_form_structure
-from set_app.db_set import get_user_data, create_tables, get_indicators_from_db, add_admin_user, get_forms
-from main_program.admin_pln import admin_interface, verif_user, validasi_form, show_admin_graph, daftar_form, detail_view, admin_register_user, admin_change_password, display_user
-from main_program.user_pln import user_interface, show_user_graph, form_filled
+from db_set import get_user_data, create_tables, get_indicators_from_db, add_admin_user, get_forms
+from admin_pln import admin_interface, verif_user, validasi_form, show_admin_graph, daftar_form, detail_view, admin_register_user, admin_change_password, display_user
+from user_pln import user_interface, show_user_graph, form_filled
 
 # set layout web
 st.set_page_config(page_title="PLN HCR",
