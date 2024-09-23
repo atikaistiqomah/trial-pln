@@ -1,6 +1,7 @@
 import streamlit as st
 from contextlib import closing
 import matplotlib.pyplot as plt
+import plotly.express as px
 from db_set import  save_user_data_to_db, get_indicators_by_form_id, get_filter_options, get_form_id_by_filter, get_user_data, delete_user_input, is_user_data_exist, get_filtered_user_data_user
 
 # ============================================== #
