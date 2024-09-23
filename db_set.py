@@ -357,7 +357,7 @@ def get_filtered_user_data_user(year, semester, form_name):
         with conn:
             # Base query untuk pengambilan data user sesuai filter tahun, semester, nama form dan username
             query = '''
-                SELECT name, form_name, value
+                SELECT name AS Unit, form_name AS Aspek, value AS Skor
                 FROM user_data 
                 WHERE year = ? 
                 AND semester = ?
@@ -371,17 +371,17 @@ def get_filtered_user_data_user(year, semester, form_name):
 
                 # Jika tidak ada hasil, kembalikan DataFrame kosong
                 if not result:
-                    return pd.DataFrame(columns=['name', 'form_name', 'value'])
+                    return pd.DataFrame(columns=['Unit', 'Aspek', 'Skor'])
 
                 # Konversi hasil query ke dalam DataFrame
-                data = pd.DataFrame(result, columns=['name', 'form_name', 'value'])
+                data = pd.DataFrame(result, columns=['Unit', 'Aspek', 'Skor'])
 
                 return data
 
             except Exception as e:
                 # Tangani error saat query gagal
                 st.error(f"Terjadi kesalahan saat mengambil data: {e}")
-                return pd.DataFrame(columns=['name', 'form_name', 'value'])
+                return pd.DataFrame(columns=['Unit', 'Aspek', 'Skor'])
 
 # Fungsi untuk mendapatkan data user terfilter (untuk admin)
 def get_filtered_user_data_admin(year, semester, form_name):
@@ -389,7 +389,7 @@ def get_filtered_user_data_admin(year, semester, form_name):
         with conn:
             # Base query untuk pengambilan data user sesuai filter tahun, semester, dan nama form
             query = '''
-                SELECT name, value 
+                SELECT name AS Unit, value as Skor
                 FROM user_data 
                 WHERE year = ? 
                 AND semester = ? 
@@ -403,17 +403,17 @@ def get_filtered_user_data_admin(year, semester, form_name):
 
                 # Jika tidak ada hasil, kembalikan DataFrame kosong
                 if not result:
-                    return pd.DataFrame(columns=['name', 'value'])
+                    return pd.DataFrame(columns=['Unit', 'Skor'])
 
                 # Konversi hasil query ke dalam DataFrame
-                data = pd.DataFrame(result, columns=['name', 'value'])
+                data = pd.DataFrame(result, columns=['Unit', 'Skor'])
 
                 return data
 
             except Exception as e:
                 # Tangani error saat query gagal
                 st.error(f"Terjadi kesalahan saat mengambil data: {e}")
-                return pd.DataFrame(columns=['name', 'value'])
+                return pd.DataFrame(columns=['Unit', 'Skor'])
 
 
 # get form by filter
