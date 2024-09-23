@@ -246,12 +246,12 @@ def show_admin_graph():
         # Menggunakan Plotly untuk membuat grafik interaktif
         fig = px.bar(
             filtered_data,
-            x='value',
-            y='name',
+            x='Skor',
+            y='Unit',
             orientation='h',
-            labels={'value': 'Nilai', 'name': 'User'},
+            labels={'Skor': 'Skor', 'Unit': 'Unit'},
             title=f'Grafik Capaian {selected_form_name} Tahun {selected_year} Semester {selected_semester}',
-            text='value'  # Menampilkan nilai di atas bar
+            text='Skor'  # Menampilkan nilai di atas bar
         )
 
         # Update layout untuk menampilkan nilai saat hover
@@ -263,7 +263,7 @@ def show_admin_graph():
         fig.update_layout(
             height=500,  # Atur tinggi grafik
             width=1000,  # Atur lebar grafik
-            xaxis_title='Nilai',
+            xaxis_title='Skor',
             yaxis_title='Unit',
             font=dict(
                 color='black',  # Mengubah font grafik menjadi hitam
