@@ -121,13 +121,37 @@ def show_user_graph():
     # Tampilkan grafik jika data tersedia
     if not filtered_data.empty:
         st.table(filtered_data)
+        
+        fig = px.bar(
+            filtered_data,
+            x='value',
+            y='form_name',
+            orientation='h',
+            labels={'value': 'Nilai', 'form_name': 'Aspek'},
+            title=f'Grafik Capaian {username} Tahun {selected_year} Semester {selected_semester}',
+            text='value'  # Menampilkan nilai di atas bar
+        )
 
-        # Misalnya gunakan matplotlib untuk menampilkan grafik
-        fig, ax = plt.subplots()
-        ax.bar(filtered_data['form_name'], filtered_data['value'])
-        ax.set_xlabel('Nilai')
-        ax.set_ylabel('Aspek')
-        ax.set_title(f'Grafik Capaian Tahun {selected_year} Semester {selected_semester}')
-        st.pyplot(fig)
+        # Update layout untuk menampilkan nilai saat hover
+        fig.update_traces(
+            texttemplate='%{text:.2f}',  # Format nilai dengan dua desimal
+            textposition='outside',     # Posisi teks di luar bar
+            hovertemplate='<b>%{y}</b>: %{x:.2f}'  # Template teks yang muncul saat hover
+        )
+        fig.update_layout(
+            height=500,  # Atur tinggi grafik
+            width=1000,  # Atur lebar grafik
+            xaxis_title='Nilai',
+            yaxis_title='Aspek',
+            font=dict(
+                color='black',  # Mengubah font grafik menjadi hitam
+                size=12         # Ukuran font (opsional, bisa disesuaikan)
+            )
+        )
+
+        # Tampilkan grafik di Streamlit
+        st.plotly_chart(fig, use_container_width=True)
+        
+        
     else:
         st.warning("Belum ada data yang tersedia untuk filter yang dipilih.")
