@@ -125,12 +125,12 @@ def show_user_graph():
         
         fig = px.bar(
             filtered_data,
-            x='value',
-            y='form_name',
+            x='Skor',
+            y='Aspek',
             orientation='h',
-            labels={'value': 'Nilai', 'form_name': 'Aspek'},
+            labels={'Skor': 'Skor', 'Aspek': 'Aspek'},
             title=f'Grafik Capaian {username} Tahun {selected_year} Semester {selected_semester}',
-            text='value'  # Menampilkan nilai di atas bar
+            text='Skor'  # Menampilkan nilai di atas bar
         )
 
         # Update layout untuk menampilkan nilai saat hover
@@ -142,7 +142,7 @@ def show_user_graph():
         fig.update_layout(
             height=500,  # Atur tinggi grafik
             width=1000,  # Atur lebar grafik
-            xaxis_title='Nilai',
+            xaxis_title='Skor',
             yaxis_title='Aspek',
             font=dict(
                 color='black',  # Mengubah font grafik menjadi hitam
