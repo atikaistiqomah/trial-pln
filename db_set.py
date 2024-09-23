@@ -5,7 +5,7 @@ import json
 import pandas as pd
 
 def get_db_connection():
-    conn = sqlite3.connect('new_data.db')
+    conn = sqlite3.connect('db/new_data.db')
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -337,13 +337,13 @@ def get_user_data_by_filter(year, semester, form_name, username):
 
                     # Append the calculated data to the rekap_data list
                     rekap_data.append({
-                        'Nama Form': row['form_name'],
-                        'Nama Unit': row['unit_name'],
+                        'Aspek': row['form_name'],
+                        'Unit': row['unit_name'],
                         'Tahun': row['year'],
                         'Semester': row['semester'],
                         'Indikator': indikator_name,
-                        'Nilai': user_value,
                         'Target': target_value,
+                        'Realisasi': user_value,
                         'Persentase': f"{percentage:.2f}%"
                     })
 
