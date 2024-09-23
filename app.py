@@ -1,11 +1,12 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from auth import login, logout
+from set_app.auth import login, logout
 # from main_program.user_pln import fill_form_structure
 # from main_program.admin_pln import create_form_structure
-from db_set import get_user_data, create_tables, get_indicators_from_db, add_admin_user, get_forms
-from admin_pln import admin_interface, verif_user, validasi_form, show_admin_graph, daftar_form, detail_view, admin_register_user, admin_change_password, display_user
-from user_pln import user_interface, show_user_graph, form_filled
+from set_app.db_set import get_user_data, create_tables, get_indicators_from_db, add_admin_user, get_forms
+from main_program.admin_pln import admin_interface, show_admin_graph, daftar_form, detail_view, admin_register_user, admin_change_password, display_user, rekap_target
+from main_program.user_pln import user_interface, show_user_graph, form_filled
+# verif_user, validasi_form,
 
 # set layout web
 st.set_page_config(page_title="PLN HCR",
@@ -64,7 +65,7 @@ def main():
         st.rerun()
 
     if st.session_state.is_admin:
-        page = st.sidebar.selectbox("Pilih Halaman Admin", ["Buat Form", "Daftar Form", "Detail Form", "Verifikasi Data", "Hasil Validasi", "Grafik Capaian", "Daftarkan Unit", "Ubah Password Akun"])
+        page = st.sidebar.selectbox("Pilih Halaman Admin", ["Buat Form", "Daftar Form", "Detail Form", "Rekap Target", "Grafik Capaian", "Daftarkan Unit", "Ubah Password Akun"])
         if page == "Buat Form":
             # create_form_structure()
             admin_interface()
@@ -74,28 +75,19 @@ def main():
             daftar_form()
         elif page == "Detail Form":
             # fill_form_structure()
-            if 'form_structures' in st.session_state and st.session_state['indicators']:
-                detail_view()
-            else:
-                st.write("Admin belum menyelesaikan penambahan indikator.")
-        elif page == "Verifikasi Data":
-            session_initiate()
-            verif_user()
-        elif page == "Hasil Validasi":
+            # if 'form_structures' in st.session_state and st.session_state['indicators']:
+            
+            detail_view()
+            # else:
+            #     st.write("Admin belum menyelesaikan penambahan indikator.")
+
+        elif page == "Rekap Target":
             # user_data_list = get_user_data()
             session_initiate()
-            validasi_form()
+            rekap_target()
         elif page == "Grafik Capaian":
             show_admin_graph()
         elif page == "Daftarkan Unit":
-            # if 'username' not in st.session_state:
-            #     st.session_state['username'] = ""
-            # if 'name' not in st.session_state:
-            #     st.session_state['name'] = ""
-            # if 'email' not in st.session_state:
-            #     st.session_state['email'] = ""
-            # if 'password' not in st.session_state:
-            #     st.session_state['password'] = ""
             if st.session_state['user']['role'] == 'admin':
                 admin_register_user()
                 
