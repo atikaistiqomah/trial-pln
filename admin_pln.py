@@ -242,12 +242,35 @@ def show_admin_graph():
     if not filtered_data.empty:
         st.table(filtered_data)
 
-        # Misalnya gunakan matplotlib untuk menampilkan grafik
-        fig, ax = plt.subplots()
-        ax.barh(filtered_data['name'], filtered_data['value'])
-        ax.set_xlabel('User')
-        ax.set_ylabel('Nilai')
-        ax.set_title(f'Grafik Capaian {selected_form_name} Tahun {selected_year} Semester {selected_semester}')
-        st.pyplot(fig)
+        # Menggunakan Plotly untuk membuat grafik interaktif
+        fig = px.bar(
+            filtered_data,
+            x='value',
+            y='name',
+            orientation='h',
+            labels={'value': 'Nilai', 'name': 'User'},
+            title=f'Grafik Capaian {selected_form_name} Tahun {selected_year} Semester {selected_semester}',
+            text='value'  # Menampilkan nilai di atas bar
+        )
+
+        # Update layout untuk menampilkan nilai saat hover
+        fig.update_traces(
+            texttemplate='%{text:.2f}',  # Format nilai dengan dua desimal
+            textposition='outside',     # Posisi teks di luar bar
+            hovertemplate='<b>%{y}</b>: %{x:.2f}'  # Template teks yang muncul saat hover
+        )
+        fig.update_layout(
+            height=500,  # Atur tinggi grafik
+            width=1000,  # Atur lebar grafik
+            xaxis_title='Nilai',
+            yaxis_title='Unit',
+            font=dict(
+                color='black',  # Mengubah font grafik menjadi hitam
+                size=12         # Ukuran font (opsional, bisa disesuaikan)
+            )
+        )
+
+        # Tampilkan grafik di Streamlit
+        st.plotly_chart(fig, use_container_width=True)
     else:
         st.warning("Belum ada data yang tersedia untuk filter yang dipilih.")
