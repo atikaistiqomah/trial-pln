@@ -241,7 +241,7 @@ def show_admin_graph():
 
     # Tampilkan grafik jika data tersedia
     if not filtered_data.empty:
-        # st.table(filtered_data)
+        st.table(filtered_data)
 
         # Menggunakan Plotly untuk membuat grafik interaktif
         fig = px.bar(
