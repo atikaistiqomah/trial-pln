@@ -60,7 +60,7 @@ def display_user():
 # INDICATOR CONFIG
 def indicator_form(indicator_index):
     # Menampilkan form indikator
-    indicator_name = st.selectbox(f"Nama Indikator {indicator_index+1}", ["Leading 1", "Leading 2", "Leading 3", "Leading 4", "Leading 5", "Lagging Output 1", "Lagging Output 2", "Lagging Output 3", "Lagging Output 4", "Lagging Output 5", "Lagging Output 1", "Lagging Outcome 2", "Lagging Outcome 3", "Lagging Outcome 4", "Lagging Outcome 5"])
+    indicator_name = st.selectbox(f"Nama Indikator {indicator_index+1}", ["Leading 1", "Leading 2", "Leading 3", "Leading 4", "Leading 5", "Lagging Output 1", "Lagging Output 2", "Lagging Output 3", "Lagging Output 4", "Lagging Output 5", "Lagging Outcome 2", "Lagging Outcome 3", "Lagging Outcome 4", "Lagging Outcome 5"])
 
     target_value = st.number_input(f"Nilai Target Indikator {indicator_index+1}", min_value=0.0, step=1.0, key=f"indicator_target_{indicator_index}")
 
