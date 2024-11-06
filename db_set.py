@@ -396,24 +396,24 @@ def get_filtered_user_data_admin(year, semester, form_name):
                 AND form_name = ?
             '''
             params = [year, semester, form_name]
+            
+            try:
+                # Eksekusi query dan ambil hasil
+                result = conn.execute(query, params).fetchall()
 
-            # try:
-            #     # Eksekusi query dan ambil hasil
-            #     result = conn.execute(query, params).fetchall()
+                # Jika tidak ada hasil, kembalikan DataFrame kosong
+                if not result:
+                    return pd.DataFrame(columns=['Unit', 'Skor'])
 
-            #     # Jika tidak ada hasil, kembalikan DataFrame kosong
-            #     if not result:
-            #         return pd.DataFrame(columns=['Unit', 'Skor'])
+                # Konversi hasil query ke dalam DataFrame
+                data = pd.DataFrame(result, columns=['Unit', 'Skor'])
 
-            #     # Konversi hasil query ke dalam DataFrame
-            #     data = pd.DataFrame(result, columns=['Unit', 'Skor'])
+                return data
 
-            #     return data
-
-            # except Exception as e:
-            #     # Tangani error saat query gagal
-            #     st.error(f"Terjadi kesalahan saat mengambil data: {e}")
-            #     return pd.DataFrame(columns=['Unit', 'Skor'])
+            except Exception as e:
+                # Tangani error saat query gagal
+                st.error(f"Terjadi kesalahan saat mengambil data: {e}")
+                return pd.DataFrame(columns=['Unit', 'Skor'])
 
 
 # get form by filter
