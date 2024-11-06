@@ -227,7 +227,7 @@ def rekap_target():
 
 
 def show_admin_graph():
-    st.title("Grafik Capaian User")
+    # st.title("Grafik Capaian User")
 
     # Ambil filter tahun, semester, dan form name
     filter_options = get_filter_options()
